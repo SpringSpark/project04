@@ -5,4 +5,8 @@ public class ChatException extends  Exception {
         super (message, cause);
     }
 
+    public ChatException(String message){
+        super (message);
+    }
+
 }
