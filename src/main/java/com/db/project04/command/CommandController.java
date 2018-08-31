@@ -1,8 +1,6 @@
 package com.db.project04.command;
 
-import com.db.project04.exceptions.ChatParseCommandException;
-import com.db.project04.exceptions.ChatParseCommandFormatException;
-import com.db.project04.exceptions.ChatParseCommandTypeException;
+import com.db.project04.exceptions.*;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -19,7 +17,11 @@ public class CommandController {
                 return new HistoryCommand();
             }
             if (Objects.equals(commandStringName, "snd")) {
-                return new SendMessageCommand(commandStringPatternMatcher.group(2));
+                try {
+                    return new SendMessageCommand(commandStringPatternMatcher.group(2));
+                } catch (ChatMessageException e) {
+                    throw new ChatParseMessageException("message had incorrect format", e);
+                }
             }
             throw new ChatParseCommandTypeException("unable to parse command type");
         }
