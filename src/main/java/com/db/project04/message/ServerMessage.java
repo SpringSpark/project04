@@ -12,7 +12,7 @@ public class ServerMessage {
 
   public ServerMessage(String handledMessageFromClient) {
       this.text = handledMessageFromClient;
-      //TODO: get text message
+      //TODO: get datetime
   }
 
     public void setText(String text) {
