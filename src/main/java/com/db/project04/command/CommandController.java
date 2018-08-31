@@ -12,19 +12,24 @@ public class CommandController {
         Pattern commandStringPattern = Pattern.compile("\\/([A-Za-z]+)(.*)");
         Matcher commandStringPatternMatcher = commandStringPattern.matcher(rawString);
         if (commandStringPatternMatcher.matches()) {
-            String commandStringName = commandStringPatternMatcher.group(1);
-            if (Objects.equals(commandStringName, "hist")) {
-                return new HistoryCommand();
-            }
-            if (Objects.equals(commandStringName, "snd")) {
-                try {
-                    return new SendMessageCommand(commandStringPatternMatcher.group(2));
-                } catch (ChatMessageException e) {
-                    throw new ChatParseMessageException("message had incorrect format", e);
-                }
-            }
-            throw new ChatParseCommandTypeException("unable to parse command type");
+            createConcreteChatCommand(commandStringPatternMatcher);
         }
         throw new ChatParseCommandFormatException("command has incorrect format");
+    }
+
+    private ChatCommand createConcreteChatCommand(Matcher commandStringPatternMatcher)
+            throws ChatParseCommandException {
+        String commandStringName = commandStringPatternMatcher.group(1);
+        if (Objects.equals(commandStringName, CommandType.HIST.getCommandText())) {
+            return new HistoryCommand();
+        }
+        if (Objects.equals(commandStringName, CommandType.SND.getCommandText())) {
+            try {
+                return new SendMessageCommand(commandStringPatternMatcher.group(2));
+            } catch (ChatMessageException e) {
+                throw new ChatParseMessageException("message had incorrect format", e);
+            }
+        }
+        throw new ChatParseCommandTypeException("unable to parse command type");
     }
 }
