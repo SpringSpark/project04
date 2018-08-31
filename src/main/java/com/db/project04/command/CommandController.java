@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class CommandController {
 
     public ChatCommand parseCommand(String rawString) throws ChatParseCommandException {
-        Pattern commandStringPattern = Pattern.compile("\\\\([A-Za-z]+)(.*)");
+        Pattern commandStringPattern = Pattern.compile("\\/([A-Za-z]+)(.*)");
         Matcher commandStringPatternMatcher = commandStringPattern.matcher(rawString);
         if (commandStringPatternMatcher.matches()) {
             String commandStringName = commandStringPatternMatcher.group(1);

@@ -7,7 +7,6 @@ import org.junit.Test;
 
 public class SendMessageCommandTest {
 
-    @Ignore
     @Test (expected = ChatMessageException.class)
     public void shouldThrowChatMessageExceptionWhenMessageIsNull() throws ChatMessageException {
         SendMessageCommand sut = new SendMessageCommand(null);
