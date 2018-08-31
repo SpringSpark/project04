@@ -6,6 +6,11 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class which is needed to parse raw commands (e.g. from console) which come as input
+ * and create concrete Chat command (now supports getting history).
+ */
+
 public class CommandController {
 
     public ChatCommand parseCommand(String rawString) throws ChatParseCommandException {
