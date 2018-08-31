@@ -12,7 +12,7 @@ public class CommandController {
         Pattern commandStringPattern = Pattern.compile("\\/([A-Za-z]+)(.*)");
         Matcher commandStringPatternMatcher = commandStringPattern.matcher(rawString);
         if (commandStringPatternMatcher.matches()) {
-            createConcreteChatCommand(commandStringPatternMatcher);
+           return createConcreteChatCommand(commandStringPatternMatcher);
         }
         throw new ChatParseCommandFormatException("command has incorrect format");
     }
