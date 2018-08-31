@@ -6,6 +6,8 @@ import com.db.project04.command.HistoryCommand;
 import com.db.project04.command.SendMessageCommand;
 import com.db.project04.exceptions.ChatMessageException;
 import com.db.project04.exceptions.ChatParseCommandException;
+import com.db.project04.exceptions.ChatParseCommandTypeException;
+import com.db.project04.exceptions.ChatParseMessageException;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -15,28 +17,24 @@ public class CommandControllerTest {
 
     private CommandController sut = new CommandController();
 
-    @Ignore
     @Test
     public void shouldCreateHistoryCommand() throws ChatParseCommandException {
         ChatCommand resultCommand = sut.parseCommand("/hist");
         assertTrue(resultCommand instanceof HistoryCommand);
     }
 
-    @Ignore
     @Test
     public void shouldCreateSendMessageCommand() throws ChatParseCommandException {
         ChatCommand resultCommand = sut.parseCommand("/snd test message");
         assertTrue(resultCommand instanceof SendMessageCommand);
     }
 
-    @Ignore
-    @Test(expected = ChatMessageException.class)
+    @Test(expected = ChatParseMessageException.class)
     public void shouldThrowChatMessageExceptionWhenMessageIsEmpty() throws ChatParseCommandException {
         ChatCommand resultCommand = sut.parseCommand("/snd ");
     }
 
-    @Ignore
-    @Test(expected = ChatMessageException.class)
+    @Test(expected = ChatParseCommandTypeException.class)
     public void shouldThrowChatMessageExceptionWhenUndefinedCommand() throws ChatParseCommandException {
         ChatCommand resultCommand = sut.parseCommand("/wrong ");
     }
