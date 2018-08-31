@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.db.project04</OriginalElement>
+  <nodes>
+    <node x="181.0" y="300.0">com.db.project04.message.ServerMessage</node>
+    <node x="0.0" y="225.0">com.db.project04.server.messagehistory</node>
+    <node x="0.0" y="0.0">com.db.project04.SendMessageCommandTest</node>
+    <node x="0.0" y="300.0">com.db.project04.command</node>
+    <node x="0.0" y="375.0">com.db.project04.server.Server</node>
+    <node x="0.0" y="75.0">com.db.project04.SimpleMessageHistoryTest</node>
+    <node x="0.0" y="150.0">com.db.project04.CommandControllerTest</node>
+    <node x="208.0" y="225.0">com.db.project04.exceptions</node>
+    <node x="127.0" y="375.0">com.db.project04.client.Client</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="182.5" y="285.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
