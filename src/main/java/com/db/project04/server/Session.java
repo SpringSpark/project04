@@ -46,10 +46,10 @@ public class Session implements Runnable {
             try {
                 while ((line = in.readLine()) != null) {
                     try {
-                        ChatCommand command = CommandController.parseCommand(line);
+                        ChatCommand command = CommandController.parseCommand(line, true);
                         if (command instanceof HistoryCommand){
 
-                            messageHistory.getMessageHistory().stream().forEach(elem ->out.println(elem));
+                            messageHistory.getMessageHistory().stream().forEach(elem ->{out.println(elem); out.flush();});
                         }
                         if (command instanceof SendMessageCommand){
 
@@ -59,6 +59,7 @@ public class Session implements Runnable {
                              messageHistory.addNewMessage(new ServerMessage(((SendMessageCommand) command).getHandledString(), date));
                              for (PrintWriter out: clientPool){
                                 out.println(messageToClient);
+                                out.flush();
                             }
 
                             if (command instanceof ClientShutdownCommand){

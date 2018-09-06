@@ -19,12 +19,22 @@ public class CommandController {
 
         Matcher commandStringPatternMatcher = COMMAND_STRING_PATTERN.matcher(rawString);
         if (commandStringPatternMatcher.matches()) {
-           return createConcreteChatCommand(commandStringPatternMatcher);
+           return createConcreteChatCommand(commandStringPatternMatcher, false);
         }
         throw new ChatParseCommandFormatException("command has incorrect format");
     }
 
-    private static ChatCommand createConcreteChatCommand(Matcher commandStringPatternMatcher)
+    public static ChatCommand parseCommand(String rawString, boolean onServer) throws ChatParseCommandException {
+
+        Matcher commandStringPatternMatcher = COMMAND_STRING_PATTERN.matcher(rawString);
+        if (commandStringPatternMatcher.matches()) {
+            return createConcreteChatCommand(commandStringPatternMatcher, onServer);
+        }
+        throw new ChatParseCommandFormatException("command has incorrect format");
+    }
+
+
+    private static ChatCommand createConcreteChatCommand(Matcher commandStringPatternMatcher, boolean onServer)
             throws ChatParseCommandException {
         String commandStringName = commandStringPatternMatcher.group(1);
         if (Objects.equals(commandStringName, HistoryCommand.COMMAND_NAME)) {
@@ -32,7 +42,11 @@ public class CommandController {
         }
         if (Objects.equals(commandStringName, RobustSendMessageCommand.COMMAND_NAME)) {
             try {
-                return new RobustSendMessageCommand(commandStringPatternMatcher.group(2));
+                String messageText = commandStringPatternMatcher.group(2);
+                return (
+                        onServer?
+                                new SendMessageCommand(messageText)
+                                : new RobustSendMessageCommand(messageText));
             } catch (ChatMessageException e) {
                 throw new ChatParseMessageException("message had incorrect format", e);
             }
