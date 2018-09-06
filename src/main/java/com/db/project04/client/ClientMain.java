@@ -2,6 +2,7 @@ package com.db.project04.client;
 
 import com.db.project04.command.ChatCommand;
 import com.db.project04.command.CommandController;
+import com.db.project04.command.HistoryCommand;
 import com.db.project04.exceptions.ChatClientException;
 import com.db.project04.exceptions.ChatParseCommandException;
 
@@ -18,13 +19,16 @@ public class ClientMain {
             while (true) {
                 Scanner in = new Scanner(System.in);
                 String inputString = in.nextLine();
-                System.out.println("You entered string " + inputString);
+                ChatCommand clientCommand = null;
                 try {
-                    ChatCommand clientCommand = CommandController.parseCommand(inputString);
+                    clientCommand = CommandController.parseCommand(inputString);
                 } catch (ChatParseCommandException e) {
                     e.printStackTrace();
                 }
                 client.send(inputString);
+                if (clientCommand instanceof HistoryCommand) {
+                    System.out.println(client.receive());
+                }
             }
 
         } catch (
