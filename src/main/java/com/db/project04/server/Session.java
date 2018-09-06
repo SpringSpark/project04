@@ -47,23 +47,29 @@ public class Session implements Runnable {
                     try {
                         System.out.println("New connection");
                         ChatCommand command = CommandController.parseCommand(line, true);
-                        if (command instanceof HistoryCommand){
+                        if (command instanceof HistoryCommand) {
 
-                            messageHistory.getMessageHistory().stream().forEach(elem ->{out.println(elem); out.flush();});
+                            messageHistory.getMessageHistory().stream().forEach(elem -> {
+                                out.println(elem.toString());
+                                out.flush();
+                            });
+                            out.println("end");
+                            out.flush();
                         }
-                        if (command instanceof SendMessageCommand){
+                        if (command instanceof SendMessageCommand) {
 
-                             String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
-                             String message = ((SendMessageCommand) command).getHandledString();
-                             String messageToClient = date + " " + message;
-                             messageHistory.addNewMessage(new ServerMessage(((SendMessageCommand) command).getHandledString(), date));
-                             for (PrintWriter out: clientPool){
+                            String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+                            String message = ((SendMessageCommand) command).getHandledString();
+                            String messageToClient = date + " " + message;
+                            messageHistory.addNewMessage(new ServerMessage(((SendMessageCommand) command).getHandledString(), date));
+                            for (PrintWriter out : clientPool) {
                                 out.println(messageToClient);
+                                out.println("end");
                                 out.flush();
                             }
 
-                            if (command instanceof ClientShutdownCommand){
-                                 clientPool.remove(this.out);
+                            if (command instanceof ClientShutdownCommand) {
+                                clientPool.remove(this.out);
                             }
                         }
                     } catch (ChatParseCommandException e) {

@@ -20,4 +20,9 @@ public class ServerMessage {
         this.text = text;
     }
 
+    @Override
+    public String toString(){
+      return this.dateTime + " " + this.text;
+    }
+
 }

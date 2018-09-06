@@ -3,7 +3,7 @@ package com.db.project04.client;
 import com.db.project04.command.ChatCommand;
 import com.db.project04.command.CommandController;
 import com.db.project04.command.HistoryCommand;
-import com.db.project04.exceptions.ChatClientException;
+import com.db.project04.command.SendMessageCommand;
 import com.db.project04.exceptions.ChatParseCommandException;
 
 import java.util.Scanner;
@@ -27,7 +27,11 @@ public class ClientMain {
                 }
                 client.send(inputString);
                 if (clientCommand instanceof HistoryCommand) {
-                    System.out.println(client.receive());
+                   client.receiveAndPrint();
+                }
+
+                if (clientCommand instanceof SendMessageCommand) {
+                    client.receiveAndPrint();
                 }
             }
 

@@ -5,6 +5,7 @@ import com.db.project04.exceptions.ChatClientException;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Objects;
 
 public class Client {
     Socket socket;
@@ -33,14 +34,16 @@ public class Client {
         out.flush();
     }
 
-    public String receive() throws ChatClientException {
+    public void receiveAndPrint() throws ChatClientException {
         String messageFromServer = null;
         try {
-            messageFromServer = in.readLine();
+            while (!Objects.equals(messageFromServer = in.readLine(), "end"))
+            {
+                System.out.println(messageFromServer);
+            }
         } catch (IOException e) {
             throw new ChatClientException("Unable to handle message server", e);
         }
-        return messageFromServer;
     }
 
     public void quit() throws ChatClientException {
