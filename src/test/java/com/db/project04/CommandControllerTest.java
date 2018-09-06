@@ -1,9 +1,6 @@
 package com.db.project04;
 
-import com.db.project04.command.ChatCommand;
-import com.db.project04.command.CommandController;
-import com.db.project04.command.HistoryCommand;
-import com.db.project04.command.RobustSendMessageCommand;
+import com.db.project04.command.*;
 import com.db.project04.exceptions.ChatParseCommandException;
 import com.db.project04.exceptions.ChatParseCommandTypeException;
 import com.db.project04.exceptions.ChatParseMessageException;
@@ -17,23 +14,23 @@ public class CommandControllerTest  implements SysoutCaptureAndAssertionAbility 
 
     @Test
     public void shouldCreateHistoryCommand() throws ChatParseCommandException {
-        ChatCommand resultCommand = CommandController.parseCommand("/hist");
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/hist", "1");
         assertTrue(resultCommand instanceof HistoryCommand);
     }
 
     @Test
     public void shouldCreateSendMessageCommand() throws ChatParseCommandException {
-        ChatCommand resultCommand = CommandController.parseCommand("/snd test message");
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/snd test message", "1");
         assertTrue(resultCommand instanceof RobustSendMessageCommand);
     }
 
     @Test(expected = ChatParseMessageException.class)
     public void shouldThrowChatMessageExceptionWhenMessageIsEmpty() throws ChatParseCommandException {
-        ChatCommand resultCommand = CommandController.parseCommand("/snd ");
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/snd ", "1");
     }
 
     @Test(expected = ChatParseCommandTypeException.class)
     public void shouldThrowChatMessageExceptionWhenUndefinedCommand() throws ChatParseCommandException {
-        ChatCommand resultCommand = CommandController.parseCommand("/wrong ");
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/wrong ", "1");
     }
 }

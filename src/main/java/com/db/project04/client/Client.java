@@ -11,9 +11,21 @@ public class Client {
     PrintWriter out;
     BufferedReader in;
 
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public Client() throws ChatClientException {
         try {
             socket = new Socket(RemoteConfiguration.HOST, RemoteConfiguration.PORT_NUMBER);
+
+            username = null;
 
             out = new PrintWriter(
                     new OutputStreamWriter(
@@ -54,5 +66,6 @@ public class Client {
         }
 
     }
+
 
 }

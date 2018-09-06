@@ -1,6 +1,7 @@
 package com.db.project04.server;
 
 import com.db.project04.command.*;
+import com.db.project04.exceptions.ChatException;
 import com.db.project04.exceptions.ChatParseCommandException;
 import com.db.project04.message.ServerMessage;
 import com.db.project04.server.messagehistory.MessageHistory;
@@ -49,7 +50,7 @@ public class Session implements Runnable {
             try {
                 while ((line = in.readLine()) != null) {
                     try {
-                        ChatCommand command = CommandController.parseCommand(line, true);
+                        ChatCommand command = ServerCommandController.parseCommand(line);
                         if (command instanceof HistoryCommand) {
 
                             messageHistory.getMessageHistory().stream().forEach(elem -> {
@@ -76,7 +77,7 @@ public class Session implements Runnable {
                     out.flush();
                 }
 
-            } catch (IOException e) {
+            } catch (IOException | ChatException e) {
                 e.printStackTrace();
             }
         }

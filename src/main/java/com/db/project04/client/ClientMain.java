@@ -1,9 +1,6 @@
 package com.db.project04.client;
 
-import com.db.project04.command.ChatCommand;
-import com.db.project04.command.CommandController;
-import com.db.project04.command.HistoryCommand;
-import com.db.project04.command.SendMessageCommand;
+import com.db.project04.command.*;
 import com.db.project04.exceptions.ChatClientException;
 import com.db.project04.exceptions.ChatParseCommandException;
 
@@ -33,19 +30,29 @@ public class ClientMain {
                 String inputString = in.nextLine();
                 ChatCommand clientCommand = null;
                 try {
-                    clientCommand = CommandController.parseCommand(inputString);
+                    clientCommand = ClientCommandController.parseCommand(inputString, client.getUsername());
+                    if(clientCommand instanceof ChidCommand){
+                        client.setUsername(((ChidCommand) clientCommand).getHandledString());
+                    }
+                    else{
+                        client.send(inputString);
+                    }
                 } catch (ChatParseCommandException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: " + e.getMessage());
                 }
-                client.send(inputString);
+                if (clientCommand instanceof HistoryCommand) {
+                   client.receiveAndPrint();
+                }
+
+                if (clientCommand instanceof SendMessageCommand) {
+                    client.receiveAndPrint();
+                }
             }
 
         } catch (
                 Exception e) {
             e.printStackTrace();
         }
-
-
     }
 }
 
