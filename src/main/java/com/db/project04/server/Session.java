@@ -1,9 +1,6 @@
 package com.db.project04.server;
 
-import com.db.project04.command.ChatCommand;
-import com.db.project04.command.CommandController;
-import com.db.project04.command.HistoryCommand;
-import com.db.project04.command.SendMessageCommand;
+import com.db.project04.command.*;
 import com.db.project04.exceptions.ChatParseCommandException;
 import com.db.project04.message.ServerMessage;
 import com.db.project04.server.messagehistory.MessageHistory;
@@ -63,13 +60,15 @@ public class Session implements Runnable {
                                 out.println(messageToClient);
                             }
 
-//                            if (command instanceof ){
-//                                 clientPool.remove(this.out);
-//                            }
+                            if (command instanceof ClientShutdownCommand){
+                                 clientPool.remove(this.out);
+                            }
                         }
                     } catch (ChatParseCommandException e) {
                         out.println("Something went wrong, retry, please");
                     }
+                    out.println();
+                    out.flush();
                 }
 
             } catch (IOException e) {
