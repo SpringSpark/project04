@@ -1,5 +1,7 @@
 package com.db.project04.server;
 
+import com.db.project04.RemoteConfiguration;
+
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -12,10 +14,11 @@ import static java.lang.Thread.interrupted;
 import static java.util.concurrent.Executors.newFixedThreadPool;
 
 public class ServerMain {
+    ExecutorService pool = newFixedThreadPool(RemoteConfiguration.POOL_SIZE);
 
-    public static void main(String[] args) throws IOException {
-        ServerSocket portListener = new ServerSocket(6666);
-        ExecutorService pool = newFixedThreadPool(10_000);
+    public void start() throws IOException {
+        ServerSocket portListener = new ServerSocket(RemoteConfiguration.PORT_NUMBER);
+
         new Thread(() -> {
             try {
                 while (!interrupted()) {
@@ -31,6 +34,10 @@ public class ServerMain {
             }
         }).start();
         System.out.println("We are alive");
+    }
+
+    public void stop() throws IOException {
+        pool.shutdownNow();
     }
 }
 
