@@ -4,6 +4,7 @@ import com.db.project04.command.ChatCommand;
 import com.db.project04.command.CommandController;
 import com.db.project04.command.HistoryCommand;
 import com.db.project04.command.SendMessageCommand;
+import com.db.project04.exceptions.ChatClientException;
 import com.db.project04.exceptions.ChatParseCommandException;
 
 import java.util.Scanner;
@@ -15,7 +16,19 @@ public class ClientMain {
     public static void main(String[] args) {
         try {
             Client client = new Client();
+            Thread newThread = new Thread( () -> {
+                try {
+                    client.receiveAndPrint();
+                } catch (ChatClientException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            );
+            newThread.start();
             while (true) {
+
+                newThread.join(10);
                 Scanner in = new Scanner(System.in);
                 String inputString = in.nextLine();
                 ChatCommand clientCommand = null;
@@ -25,19 +38,14 @@ public class ClientMain {
                     e.printStackTrace();
                 }
                 client.send(inputString);
-                if (clientCommand instanceof HistoryCommand) {
-                   client.receiveAndPrint();
-                }
-
-                if (clientCommand instanceof SendMessageCommand) {
-                    client.receiveAndPrint();
-                }
             }
 
         } catch (
                 Exception e) {
             e.printStackTrace();
         }
+
+
     }
 }
 

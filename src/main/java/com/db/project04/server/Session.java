@@ -20,10 +20,10 @@ public class Session implements Runnable {
     private BufferedReader in;
     private PrintWriter out;
     static Collection<PrintWriter> clientPool = new ArrayList();
-    private MessageHistory messageHistory = new SimpleMessageHistory();
     String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+    private MessageHistory messageHistory;
 
-    public Session(Socket client) {
+    public Session(Socket client, MessageHistory messageHistory) {
         this.client = client;
         try {
             this.out = new PrintWriter(
@@ -34,7 +34,9 @@ public class Session implements Runnable {
                     new InputStreamReader(
                             new BufferedInputStream(
                                     client.getInputStream())));
+            this.messageHistory = messageHistory;
             System.out.println("New connection");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,21 +56,15 @@ public class Session implements Runnable {
                                 out.println(elem.toString());
                                 out.flush();
                             });
-                            out.println("end");
-                            out.flush();
                         }
                         if (command instanceof SendMessageCommand) {
-
-
                             String message = ((SendMessageCommand) command).getHandledString();
                             String messageToClient = date + " " + message;
                             messageHistory.addNewMessage(new ServerMessage(((SendMessageCommand) command).getHandledString(), date));
                             for (PrintWriter out : clientPool) {
                                 out.println(messageToClient);
-                                out.println("end");
                                 out.flush();
                             }
-
                             if (command instanceof ClientShutdownCommand) {
                                 clientPool.remove(this.out);
                             }

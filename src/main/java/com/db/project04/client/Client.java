@@ -5,7 +5,6 @@ import com.db.project04.exceptions.ChatClientException;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Objects;
 
 public class Client {
     Socket socket;
@@ -25,7 +24,7 @@ public class Client {
                             new BufferedInputStream(
                                     socket.getInputStream())));
         } catch (IOException e) {
-           throw new ChatClientException("Unable to connect to server", e);
+            throw new ChatClientException("Unable to connect to server", e);
         }
     }
 
@@ -37,8 +36,7 @@ public class Client {
     public void receiveAndPrint() throws ChatClientException {
         String messageFromServer = null;
         try {
-            while (!Objects.equals(messageFromServer = in.readLine(), "end"))
-            {
+            while ((messageFromServer = in.readLine())!= null) {
                 System.out.println(messageFromServer);
             }
         } catch (IOException e) {

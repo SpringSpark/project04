@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MessageHistory {
-    protected static List<ServerMessage> messageHistoryArray;
+    protected List<ServerMessage> messageHistoryArray;
 
     public abstract List<ServerMessage> getMessageHistory();
 
