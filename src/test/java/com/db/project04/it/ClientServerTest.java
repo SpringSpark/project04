@@ -12,6 +12,7 @@ import com.db.project04.server.Session;
 import org.apache.maven.settings.Server;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -40,11 +41,9 @@ public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
         server.start();
         Client client = new Client();
         String testString = "/snd test";
-        //client.send(testString);
-        //assertSysoutContains("We are alive");
-        //server.stop();
     }
-/*
+
+    @Ignore
     @Test
     public void serverShouldCreateNewConnections() throws IOException, ChatClientException, InterruptedException {
         ServerMain server = new ServerMain();
@@ -72,12 +71,5 @@ public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("New connection");
         server.stop();
     }
-*/
-    /*@Test
-    public void bla() throws IOException{
-        ServerSocket portListener = new ServerSocket(RemoteConfiguration.PORT_NUMBER);
-        Socket clientSession = portListener.accept();
-        Session session = new Session(clientSession);
-        assertSysoutContains("New connection");
-    }*/
+
 }
