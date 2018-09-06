@@ -30,6 +30,7 @@ public class Client {
 
     public void send(String stringMessage) {
         out.println(stringMessage);
+        out.flush();
     }
 
     public String receive() throws ChatClientException {
