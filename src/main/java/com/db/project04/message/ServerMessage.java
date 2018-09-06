@@ -8,10 +8,11 @@ import java.util.Date;
  */
 public class ServerMessage {
     private String text;
-    private Date dateTime;
+    private String dateTime;
 
-  public ServerMessage(String handledMessageFromClient) {
+  public ServerMessage(String handledMessageFromClient, String dateTime) {
       this.text = handledMessageFromClient;
+      this.dateTime = dateTime;
       //TODO: get date time
   }
 

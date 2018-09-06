@@ -19,4 +19,8 @@ public class SendMessageCommand extends ChatCommand {
         }
         handledString = messageString;
     }
+
+    public String getHandledString() {
+        return handledString;
+    }
 }

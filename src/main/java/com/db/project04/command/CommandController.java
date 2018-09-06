@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class CommandController {
 
-    public ChatCommand parseCommand(String rawString) throws ChatParseCommandException {
+    public static ChatCommand parseCommand(String rawString) throws ChatParseCommandException {
         Pattern commandStringPattern = Pattern.compile("\\/([A-Za-z]+)(.*)");
         Matcher commandStringPatternMatcher = commandStringPattern.matcher(rawString);
         if (commandStringPatternMatcher.matches()) {
@@ -22,7 +22,7 @@ public class CommandController {
         throw new ChatParseCommandFormatException("command has incorrect format");
     }
 
-    private ChatCommand createConcreteChatCommand(Matcher commandStringPatternMatcher)
+    private static ChatCommand createConcreteChatCommand(Matcher commandStringPatternMatcher)
             throws ChatParseCommandException {
         String commandStringName = commandStringPatternMatcher.group(1);
         if (Objects.equals(commandStringName, CommandType.HIST.getCommandText())) {
