@@ -25,7 +25,6 @@ public class ClientMain {
                         System.out.println("Can't shutdown client in a proper way");
                     }
                     finally {
-                        System.out.println("Server is shutdowned");
                         System.exit(0);
                     }
                 }
