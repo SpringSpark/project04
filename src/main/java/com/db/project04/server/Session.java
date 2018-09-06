@@ -45,6 +45,7 @@ public class Session implements Runnable {
             try {
                 while ((line = in.readLine()) != null) {
                     try {
+                        System.out.println("New connection");
                         ChatCommand command = CommandController.parseCommand(line);
                         if (command instanceof HistoryCommand){
 
