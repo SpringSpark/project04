@@ -2,6 +2,7 @@ package com.db.project04.client;
 
 import com.db.project04.command.*;
 import com.db.project04.exceptions.ChatClientException;
+import com.db.project04.exceptions.ChatMessageException;
 import com.db.project04.exceptions.ChatParseCommandException;
 
 import java.util.Scanner;
@@ -17,9 +18,17 @@ public class ClientMain {
                 try {
                     client.receiveAndPrint();
                 } catch (ChatClientException e) {
-                    e.printStackTrace();
+                    System.out.println("Server is dead");
+                    try {
+                        client.quit();
+                    } catch (ChatClientException e1) {
+                        System.out.println("Can't shutdown client in a proper way");
+                    }
+                    finally {
+                        System.out.println("Server is shutdowned");
+                        System.exit(0);
+                    }
                 }
-
             }
             );
             newThread.start();
@@ -40,17 +49,9 @@ public class ClientMain {
                 } catch (ChatParseCommandException e) {
                     System.out.println("Error: " + e.getMessage());
                 }
-                if (clientCommand instanceof HistoryCommand) {
-                   client.receiveAndPrint();
-                }
-
-                if (clientCommand instanceof SendMessageCommand) {
-                    client.receiveAndPrint();
-                }
             }
 
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

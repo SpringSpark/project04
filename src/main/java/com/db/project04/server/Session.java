@@ -3,6 +3,7 @@ package com.db.project04.server;
 import com.db.project04.command.*;
 import com.db.project04.exceptions.ChatException;
 import com.db.project04.exceptions.ChatParseCommandException;
+import com.db.project04.exceptions.ClientDisconnectedException;
 import com.db.project04.message.ServerMessage;
 import com.db.project04.server.messagehistory.MessageHistory;
 import com.db.project04.server.messagehistory.SimpleMessageHistory;
@@ -78,7 +79,7 @@ public class Session implements Runnable {
                 }
 
             } catch (IOException | ChatException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
         try {
