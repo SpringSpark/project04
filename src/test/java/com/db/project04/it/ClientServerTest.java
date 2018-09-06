@@ -1,23 +1,15 @@
 package com.db.project04.it;
 
-import com.db.project04.RemoteConfiguration;
 import com.db.project04.SysoutCaptureAndAssertionAbility;
 import com.db.project04.client.Client;
-import com.db.project04.command.ChatCommand;
-import com.db.project04.command.CommandController;
 import com.db.project04.exceptions.ChatClientException;
-import com.db.project04.exceptions.ChatParseCommandException;
-import com.db.project04.server.ServerMain;
-import com.db.project04.server.Session;
-import org.apache.maven.settings.Server;
+import com.db.project04.server.Server;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
 
@@ -37,7 +29,7 @@ public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void serverAndClientShouldNotRaiseException() throws IOException, ChatClientException {
-        ServerMain server = new ServerMain();
+        Server server = new Server();
         server.start();
         Client client = new Client();
         String testString = "/snd test";
@@ -46,7 +38,7 @@ public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
     @Ignore
     @Test
     public void serverShouldCreateNewConnections() throws IOException, ChatClientException, InterruptedException {
-        ServerMain server = new ServerMain();
+        Server server = new Server();
         server.start();
         Client client1 = new Client();
         Client client2 = new Client();
