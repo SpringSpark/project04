@@ -4,10 +4,13 @@ import com.db.project04.exceptions.*;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.util.Objects.isNull;
 
 public class ClientCommandController extends CommandController{
+
+    public static final Pattern COMMAND_STRING_PATTERN = Pattern.compile("\\/([A-Za-z]+)(.*)");
 
     private ClientCommandController() {
     }

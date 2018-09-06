@@ -15,6 +15,6 @@ import static java.util.Objects.isNull;
 
 public class CommandController {
 
-    public static final Pattern COMMAND_STRING_PATTERN = Pattern.compile("\\/([A-Za-z]+)(.*)");
+
 
 }
