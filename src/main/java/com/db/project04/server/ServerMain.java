@@ -14,6 +14,14 @@ import static java.lang.Thread.interrupted;
 import static java.util.concurrent.Executors.newFixedThreadPool;
 
 public class ServerMain {
+    public static void main(String[] args) {
+        ServerMain serverMain = new ServerMain();
+        try {
+            serverMain.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     ExecutorService pool = newFixedThreadPool(RemoteConfiguration.POOL_SIZE);
 
     public void start() throws IOException {
