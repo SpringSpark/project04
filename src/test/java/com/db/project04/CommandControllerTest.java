@@ -17,23 +17,23 @@ public class CommandControllerTest  implements SysoutCaptureAndAssertionAbility 
 
     @Test
     public void shouldCreateHistoryCommand() throws ChatParseCommandException {
-        ChatCommand resultCommand = CommandController.parseCommand("/hist");
+        ChatCommand resultCommand = CommandController.parseCommand("/hist", "");
         assertTrue(resultCommand instanceof HistoryCommand);
     }
 
     @Test
     public void shouldCreateSendMessageCommand() throws ChatParseCommandException {
-        ChatCommand resultCommand = CommandController.parseCommand("/snd test message");
+        ChatCommand resultCommand = CommandController.parseCommand("/snd test message", "");
         assertTrue(resultCommand instanceof RobustSendMessageCommand);
     }
 
     @Test(expected = ChatParseMessageException.class)
     public void shouldThrowChatMessageExceptionWhenMessageIsEmpty() throws ChatParseCommandException {
-        ChatCommand resultCommand = CommandController.parseCommand("/snd ");
+        ChatCommand resultCommand = CommandController.parseCommand("/snd ", "");
     }
 
     @Test(expected = ChatParseCommandTypeException.class)
     public void shouldThrowChatMessageExceptionWhenUndefinedCommand() throws ChatParseCommandException {
-        ChatCommand resultCommand = CommandController.parseCommand("/wrong ");
+        ChatCommand resultCommand = CommandController.parseCommand("/wrong ", "");
     }
 }

@@ -24,4 +24,8 @@ public class ChidCommand implements ChatCommand{
         }
         handledString = messageString;
     }
+
+    public String getHandledString() {
+        return handledString;
+    }
 }

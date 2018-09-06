@@ -1,9 +1,6 @@
 package com.db.project04.client;
 
-import com.db.project04.command.ChatCommand;
-import com.db.project04.command.CommandController;
-import com.db.project04.command.HistoryCommand;
-import com.db.project04.command.SendMessageCommand;
+import com.db.project04.command.*;
 import com.db.project04.exceptions.ChatParseCommandException;
 
 import java.util.Scanner;
@@ -20,8 +17,13 @@ public class ClientMain {
                 String inputString = in.nextLine();
                 ChatCommand clientCommand = null;
                 try {
-                    clientCommand = CommandController.parseCommand(inputString);
-                    client.send(inputString);
+                    clientCommand = CommandController.parseCommand(inputString, client.getUsername());
+                    if(clientCommand instanceof ChidCommand){
+                        client.setUsername(((ChidCommand) clientCommand).getHandledString());
+                    }
+                    else{
+                        client.send(inputString);
+                    }
                 } catch (ChatParseCommandException e) {
                     System.out.println("Error: " + e.getMessage());
                     //e.printStackTrace();

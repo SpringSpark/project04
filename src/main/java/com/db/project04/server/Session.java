@@ -47,7 +47,7 @@ public class Session implements Runnable {
             try {
                 while ((line = in.readLine()) != null) {
                     try {
-                        ChatCommand command = CommandController.parseCommand(line, true);
+                        ChatCommand command = CommandController.parseCommand(line, true, "");
                         if (command instanceof HistoryCommand) {
 
                             messageHistory.getMessageHistory().stream().forEach(elem -> {
