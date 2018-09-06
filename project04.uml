@@ -4,74 +4,76 @@
   <OriginalElement>com.db.project04</OriginalElement>
   <nodes>
     <node x="0.0" y="470.0">com.db.project04.server.messagehistory.SimpleMessageHistory</node>
-    <node x="97.5" y="235.0">com.db.project04.command.ChatCommand</node>
-    <node x="205.0" y="620.0">com.db.project04.command.CommandType</node>
-    <node x="383.0" y="620.0">com.db.project04.message.ServerMessage</node>
+    <node x="114.5" y="235.0">com.db.project04.command.ChatCommand</node>
+    <node x="-192.0" y="277.0">com.db.project04.command.CommandType</node>
+    <node x="481.0" y="543.0">com.db.project04.message.ServerMessage</node>
+    <node x="0.0" y="160.0">com.db.project04.exceptions.ChatParseCommandFormatException</node>
     <node x="18.0" y="390.0">com.db.project04.server.messagehistory.MessageHistory</node>
-    <node x="220.00000000000006" y="160.0">com.db.project04.exceptions.ChatParseCommandFormatException</node>
-    <node x="215.0" y="390.0">com.db.project04.SendMessageCommandTest</node>
-    <node x="489.00000000000006" y="160.0">com.db.project04.exceptions.ChatParseCommandTypeException</node>
+    <node x="-309.0" y="479.0">com.db.project04.SendMessageCommandTest</node>
+    <node x="489.0" y="160.0">com.db.project04.exceptions.ChatParseCommandTypeException</node>
     <node x="0.0" y="695.0">com.db.project04.server.Server</node>
-    <node x="0.0" y="160.0">com.db.project04.exceptions.ChatParseMessageException</node>
-    <node x="0.0" y="545.0">com.db.project04.SimpleMessageHistoryTest</node>
-    <node x="0.0" y="620.0">com.db.project04.command.CommandController</node>
-    <node x="387.25000000000006" y="0.0">com.db.project04.exceptions.ChatException</node>
-    <node x="0.0" y="315.0">com.db.project04.command.HistoryCommand</node>
-    <node x="237.0" y="545.0">com.db.project04.CommandControllerTest</node>
-    <node x="165.0" y="315.0">com.db.project04.command.SendMessageCommand</node>
-    <node x="239.00000000000006" y="80.0">com.db.project04.exceptions.ChatParseCommandException</node>
-    <node x="470.00000000000006" y="80.0">com.db.project04.exceptions.ChatMessageException</node>
+    <node x="269.0" y="160.0">com.db.project04.exceptions.ChatParseMessageException</node>
+    <node x="-307.0" y="518.0">com.db.project04.SimpleMessageHistoryTest</node>
+    <node x="-195.0" y="225.0">com.db.project04.command.CommandController</node>
+    <node x="199.0" y="315.0">com.db.project04.command.HistoryCommand</node>
+    <node x="0.0" y="315.0">com.db.project04.command.SendMessageCommand</node>
+    <node x="411.75" y="0.0">com.db.project04.exceptions.ChatException</node>
+    <node x="-301.0" y="564.0">com.db.project04.CommandControllerTest</node>
+    <node x="263.5" y="80.0">com.db.project04.exceptions.ChatParseCommandException</node>
+    <node x="494.5" y="80.0">com.db.project04.exceptions.ChatMessageException</node>
     <node x="127.0" y="695.0">com.db.project04.client.Client</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="com.db.project04.exceptions.ChatParseMessageException" target="com.db.project04.exceptions.ChatParseCommandException">
-      <point x="0.0" y="-15.0" />
-      <point x="100.0" y="135.0" />
-      <point x="274.16666666666674" y="135.0" />
-      <point x="-70.33333333333331" y="15.0" />
-    </edge>
     <edge source="com.db.project04.server.messagehistory.SimpleMessageHistory" target="com.db.project04.server.messagehistory.MessageHistory">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.db.project04.exceptions.ChatParseMessageException" target="com.db.project04.exceptions.ChatParseCommandException">
       <point x="0.0" y="-15.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="com.db.project04.command.HistoryCommand" target="com.db.project04.command.ChatCommand">
       <point x="0.0" y="-15.0" />
-      <point x="72.5" y="290.0" />
-      <point x="130.5" y="290.0" />
-      <point x="-33.0" y="15.0" />
+      <point x="271.5" y="290.0" />
+      <point x="213.5" y="290.0" />
+      <point x="33.0" y="15.0" />
     </edge>
     <edge source="com.db.project04.command.SendMessageCommand" target="com.db.project04.command.ChatCommand">
       <point x="0.0" y="-15.0" />
-      <point x="254.5" y="290.0" />
-      <point x="196.5" y="290.0" />
-      <point x="33.0" y="15.0" />
+      <point x="89.5" y="290.0" />
+      <point x="147.5" y="290.0" />
+      <point x="-33.0" y="15.0" />
     </edge>
     <edge source="com.db.project04.exceptions.ChatMessageException" target="com.db.project04.exceptions.ChatException">
       <point x="0.0" y="-15.0" />
-      <point x="556.0" y="55.0" />
-      <point x="481.75000000000006" y="55.0" />
+      <point x="580.5" y="55.0" />
+      <point x="506.25" y="55.0" />
       <point x="31.5" y="15.0" />
     </edge>
     <edge source="com.db.project04.exceptions.ChatParseCommandException" target="com.db.project04.exceptions.ChatException">
       <point x="0.0" y="-15.0" />
-      <point x="344.50000000000006" y="55.0" />
-      <point x="418.75000000000006" y="55.0" />
+      <point x="369.0" y="55.0" />
+      <point x="443.25" y="55.0" />
       <point x="-31.5" y="15.0" />
     </edge>
     <edge source="com.db.project04.exceptions.ChatParseCommandFormatException" target="com.db.project04.exceptions.ChatParseCommandException">
       <point x="0.0" y="-15.0" />
-      <point x="0.0" y="15.0" />
+      <point x="124.5" y="135.0" />
+      <point x="298.6666666666667" y="135.0" />
+      <point x="-70.33333333333331" y="15.0" />
     </edge>
     <edge source="com.db.project04.exceptions.ChatParseCommandTypeException" target="com.db.project04.exceptions.ChatParseCommandException">
       <point x="0.0" y="-15.0" />
       <point x="607.5" y="135.0" />
-      <point x="414.83333333333337" y="135.0" />
+      <point x="439.3333333333333" y="135.0" />
       <point x="70.33333333333331" y="15.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="182.5" y="245.0" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="1.0" x="212.5" y="345.0" />
+  <SelectedNodes>
+    <node>com.db.project04.CommandControllerTest</node>
+  </SelectedNodes>
   <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
