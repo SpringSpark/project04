@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class CommandControllerTest {
+public class CommandControllerTest  implements SysoutCaptureAndAssertionAbility  {
 
     //private CommandController sut = new CommandController();
 
