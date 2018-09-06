@@ -13,7 +13,7 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
 
 public class ServerMain {
 
-    public static void main(String[] args) throws IOException {
+    public void start() throws IOException {
         ServerSocket portListener = new ServerSocket(6666);
         ExecutorService pool = newFixedThreadPool(10_000);
         new Thread(() -> {

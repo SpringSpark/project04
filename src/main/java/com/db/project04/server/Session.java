@@ -33,6 +33,7 @@ public class Session implements Runnable {
                     new InputStreamReader(
                             new BufferedInputStream(
                                     client.getInputStream())));
+            System.out.println("New connection");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,7 +46,6 @@ public class Session implements Runnable {
             try {
                 while ((line = in.readLine()) != null) {
                     try {
-                        System.out.println("New connection");
                         ChatCommand command = CommandController.parseCommand(line);
                         if (command instanceof HistoryCommand){
 
