@@ -48,7 +48,15 @@ public class CommandController {
                                 new SendMessageCommand(messageText)
                                 : new RobustSendMessageCommand(messageText));
             } catch (ChatMessageException e) {
-                throw new ChatParseMessageException("message had incorrect format", e);
+                throw new ChatParseMessageException("message has incorrect format", e);
+            }
+        }
+        if (Objects.equals(commandStringName, ChidCommand.COMMAND_NAME)){
+            try {
+                String messageText = commandStringPatternMatcher.group(2);
+                return new ChidCommand(messageText);
+            } catch (ChatMessageException e) {
+                throw new ChatParseMessageException("username has incorrect format", e);
             }
         }
         if (Objects.equals(commandStringName, ClientShutdownCommand.COMMAND_NAME)) {

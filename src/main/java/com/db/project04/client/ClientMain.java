@@ -21,10 +21,11 @@ public class ClientMain {
                 ChatCommand clientCommand = null;
                 try {
                     clientCommand = CommandController.parseCommand(inputString);
+                    client.send(inputString);
                 } catch (ChatParseCommandException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: " + e.getMessage());
+                    //e.printStackTrace();
                 }
-                client.send(inputString);
                 if (clientCommand instanceof HistoryCommand) {
                    client.receiveAndPrint();
                 }
