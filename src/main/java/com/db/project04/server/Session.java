@@ -21,6 +21,7 @@ public class Session implements Runnable {
     private PrintWriter out;
     static Collection<PrintWriter> clientPool = new ArrayList();
     private MessageHistory messageHistory = new SimpleMessageHistory();
+    String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
 
     public Session(Socket client) {
         this.client = client;
@@ -58,7 +59,7 @@ public class Session implements Runnable {
                         }
                         if (command instanceof SendMessageCommand) {
 
-                            String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+
                             String message = ((SendMessageCommand) command).getHandledString();
                             String messageToClient = date + " " + message;
                             messageHistory.addNewMessage(new ServerMessage(((SendMessageCommand) command).getHandledString(), date));
