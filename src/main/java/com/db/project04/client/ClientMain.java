@@ -44,7 +44,7 @@ public class ClientMain {
                         client.setUsername(((ChidCommand) clientCommand).getHandledString());
                     }
                     else{
-                        client.send(inputString);
+                        client.send(client.getUsername() + " " + inputString);
                     }
                 } catch (ChatParseCommandException e) {
                     System.out.println("Error: " + e.getMessage());
