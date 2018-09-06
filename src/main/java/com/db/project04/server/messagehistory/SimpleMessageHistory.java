@@ -3,10 +3,11 @@ package com.db.project04.server.messagehistory;
 import com.db.project04.message.ServerMessage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleMessageHistory extends MessageHistory {
     @Override
-    public ArrayList<ServerMessage> getMessageHistory() {
+    public List<ServerMessage> getMessageHistory() {
         return messageHistoryArray;
     }
 
