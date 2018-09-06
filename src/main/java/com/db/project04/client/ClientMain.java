@@ -17,7 +17,7 @@ public class ClientMain {
                 String inputString = in.nextLine();
                 ChatCommand clientCommand = null;
                 try {
-                    clientCommand = CommandController.parseCommand(inputString, client.getUsername());
+                    clientCommand = ClientCommandController.parseCommand(inputString, client.getUsername());
                     if(clientCommand instanceof ChidCommand){
                         client.setUsername(((ChidCommand) clientCommand).getHandledString());
                     }
