@@ -45,7 +45,6 @@ public class ClientCommandController extends CommandController{
         if (Objects.equals(commandStringName, ChidCommand.COMMAND_NAME)){
             try {
                 String messageText = commandStringPatternMatcher.group(2);
-                System.out.println("I'll name you " + messageText);
                 return new ChidCommand(messageText);
             } catch (ChatMessageException e) {
                 throw new ChatParseMessageException("username has incorrect format", e);

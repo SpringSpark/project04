@@ -22,6 +22,9 @@ public class ChidCommand implements ChatCommand{
         if(messageString.length() > MAX_LENGTH) {
             throw new ChatMessageException("username is longer than 150 characters");
         }
+        if(messageString.contains(" ")) {
+            throw new ChatMessageException("invalid username");
+        }
         handledString = messageString;
     }
 
