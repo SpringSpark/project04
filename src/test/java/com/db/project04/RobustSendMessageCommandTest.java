@@ -1,11 +1,10 @@
 package com.db.project04;
 
-import com.db.project04.command.SendMessageCommand;
+import com.db.project04.command.RobustSendMessageCommand;
 import com.db.project04.exceptions.ChatMessageException;
-import org.junit.Ignore;
 import org.junit.Test;
 
-public class SendMessageCommandTest {
+public class RobustSendMessageCommandTest {
 
     private final String CORRECT_STRING = "test string";
     private final String TOO_LONG_STRING = "testesttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt";
@@ -13,32 +12,32 @@ public class SendMessageCommandTest {
 
     @Test
     public void shouldCreateSendMessageCommandWhendMessageIsFine() throws ChatMessageException {
-        SendMessageCommand sut = new SendMessageCommand(CORRECT_STRING);
+        RobustSendMessageCommand sut = new RobustSendMessageCommand(CORRECT_STRING);
     }
 
     @Test (expected = ChatMessageException.class)
     public void shouldThrowChatMessageExceptionWhenMessageIsNull() throws ChatMessageException {
-        SendMessageCommand sut = new SendMessageCommand(null);
+        RobustSendMessageCommand sut = new RobustSendMessageCommand(null);
     }
 
     @Test (expected = ChatMessageException.class)
     public void shouldThrowChatMessageExceptionWhenMessageIsEmpty() throws ChatMessageException {
-        SendMessageCommand sut = new SendMessageCommand(" ");
+        RobustSendMessageCommand sut = new RobustSendMessageCommand(" ");
     }
 
     @Test (expected = ChatMessageException.class)
     public void shouldThrowChatMessageExceptionWhenMessageContainsOnlyBlankSpaces() throws ChatMessageException {
-        SendMessageCommand sut = new SendMessageCommand("         ");
+        RobustSendMessageCommand sut = new RobustSendMessageCommand("         ");
     }
 
     @Test (expected = ChatMessageException.class)
     public void shouldThrowChatMessageExceptionWhenMessageIsLongerThan150() throws ChatMessageException {
-        SendMessageCommand sut = new SendMessageCommand(TOO_LONG_STRING);
+        RobustSendMessageCommand sut = new RobustSendMessageCommand(TOO_LONG_STRING);
     }
 
     @Test
     public void shouldCreateSendMessageCommandWhenTrimmedMessageIsFine() throws ChatMessageException {
-        SendMessageCommand sut = new SendMessageCommand(CORRECT_STRING_WITH_SPACES);
+        RobustSendMessageCommand sut = new RobustSendMessageCommand(CORRECT_STRING_WITH_SPACES);
     }
 
 }

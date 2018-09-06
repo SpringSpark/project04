@@ -9,7 +9,7 @@
     <node x="0.0" y="150.0">com.db.project04.CommandControllerTest</node>
     <node x="227.0" y="150.0">com.db.project04.exceptions</node>
     <node x="0.0" y="300.0">com.db.project04.server</node>
-    <node x="0.0" y="0.0">com.db.project04.SendMessageCommandTest</node>
+    <node x="0.0" y="0.0">com.db.project04.RobustSendMessageCommandTest</node>
     <node x="0.0" y="225.0">com.db.project04.command</node>
   </nodes>
   <notes />

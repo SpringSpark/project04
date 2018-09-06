@@ -9,14 +9,14 @@
     <node x="481.0" y="543.0">com.db.project04.message.ServerMessage</node>
     <node x="0.0" y="160.0">com.db.project04.exceptions.ChatParseCommandFormatException</node>
     <node x="18.0" y="390.0">com.db.project04.server.messagehistory.MessageHistory</node>
-    <node x="-309.0" y="479.0">com.db.project04.SendMessageCommandTest</node>
+    <node x="-309.0" y="479.0">com.db.project04.RobustSendMessageCommandTest</node>
     <node x="489.0" y="160.0">com.db.project04.exceptions.ChatParseCommandTypeException</node>
     <node x="0.0" y="695.0">com.db.project04.server.Server</node>
     <node x="269.0" y="160.0">com.db.project04.exceptions.ChatParseMessageException</node>
     <node x="-307.0" y="518.0">com.db.project04.SimpleMessageHistoryTest</node>
     <node x="-195.0" y="225.0">com.db.project04.command.CommandController</node>
     <node x="199.0" y="315.0">com.db.project04.command.HistoryCommand</node>
-    <node x="0.0" y="315.0">com.db.project04.command.SendMessageCommand</node>
+    <node x="0.0" y="315.0">com.db.project04.command.RobustSendMessageCommand</node>
     <node x="411.75" y="0.0">com.db.project04.exceptions.ChatException</node>
     <node x="-301.0" y="564.0">com.db.project04.CommandControllerTest</node>
     <node x="263.5" y="80.0">com.db.project04.exceptions.ChatParseCommandException</node>
@@ -39,7 +39,7 @@
       <point x="213.5" y="290.0" />
       <point x="33.0" y="15.0" />
     </edge>
-    <edge source="com.db.project04.command.SendMessageCommand" target="com.db.project04.command.ChatCommand">
+    <edge source="com.db.project04.command.RobustSendMessageCommand" target="com.db.project04.command.ChatCommand">
       <point x="0.0" y="-15.0" />
       <point x="89.5" y="290.0" />
       <point x="147.5" y="290.0" />
