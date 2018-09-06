@@ -13,28 +13,35 @@ import java.util.regex.Pattern;
 
 public class CommandController {
 
-    public ChatCommand parseCommand(String rawString) throws ChatParseCommandException {
-        Pattern commandStringPattern = Pattern.compile("\\/([A-Za-z]+)(.*)");
-        Matcher commandStringPatternMatcher = commandStringPattern.matcher(rawString);
+    public static final Pattern COMMAND_STRING_PATTERN = Pattern.compile("\\/([A-Za-z]+)(.*)");
+
+    public static ChatCommand parseCommand(String rawString) throws ChatParseCommandException {
+
+        Matcher commandStringPatternMatcher = COMMAND_STRING_PATTERN.matcher(rawString);
         if (commandStringPatternMatcher.matches()) {
            return createConcreteChatCommand(commandStringPatternMatcher);
         }
         throw new ChatParseCommandFormatException("command has incorrect format");
     }
 
-    private ChatCommand createConcreteChatCommand(Matcher commandStringPatternMatcher)
+    private static ChatCommand createConcreteChatCommand(Matcher commandStringPatternMatcher)
             throws ChatParseCommandException {
         String commandStringName = commandStringPatternMatcher.group(1);
-        if (Objects.equals(commandStringName, CommandType.HIST.getCommandText())) {
+        if (Objects.equals(commandStringName, HistoryCommand.COMMAND_NAME)) {
             return new HistoryCommand();
         }
-        if (Objects.equals(commandStringName, CommandType.SND.getCommandText())) {
+        if (Objects.equals(commandStringName, RobustSendMessageCommand.COMMAND_NAME)) {
             try {
-                return new SendMessageCommand(commandStringPatternMatcher.group(2));
+                return new RobustSendMessageCommand(commandStringPatternMatcher.group(2));
             } catch (ChatMessageException e) {
                 throw new ChatParseMessageException("message had incorrect format", e);
             }
         }
+        if (Objects.equals(commandStringName, ClientShutdownCommand.COMMAND_NAME)) {
+            return  new ClientShutdownCommand();
+        }
         throw new ChatParseCommandTypeException("unable to parse command type");
     }
+
+    private CommandController(){}
 }
