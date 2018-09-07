@@ -4,6 +4,10 @@ import com.db.project04.exceptions.ChatMessageException;
 
 import static java.util.Objects.isNull;
 
+/**
+ * Class which is used by Client and checks text message for correctness.
+ */
+
 public class RobustSendMessageCommand extends SendMessageCommand {
 
     public static final int MAX_LENGTH = 150;

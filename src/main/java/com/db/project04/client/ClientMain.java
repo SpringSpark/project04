@@ -58,7 +58,14 @@ public class ClientMain {
             System.out.println("Can't shutdown client in a proper way");
         }
         finally {
-            System.exit(0);
+            System.out.println("System will now exit");
+            try {
+                Thread.sleep(100);
+                System.exit(0);
+            } catch (InterruptedException e) {
+                System.out.println("Client is incorrectly interrupted");
+            }
+
         }
     }
 

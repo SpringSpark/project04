@@ -12,6 +12,11 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * Client class implementation.
+ * Connects to server, sends and receives messages.
+ */
+
 public class Client {
     private Socket socket;
     private PrintWriter out;
@@ -51,6 +56,10 @@ public class Client {
         out.flush();
     }
 
+    /**
+     * Receives messages from server and prints it to console.
+     * @throws ChatClientException when is unable to handle message from server.
+     */
     public void receiveAndPrint() throws ChatClientException {
         String messageFromServer = null;
         try {

@@ -1,17 +1,17 @@
 package com.db.project04.command;
 
-
 import com.db.project04.exceptions.ChatMessageException;
 import com.db.project04.exceptions.ChatParseCommandException;
 import com.db.project04.exceptions.ChatParseCommandFormatException;
 import com.db.project04.exceptions.ChatParseMessageException;
 import com.db.project04.exceptions.ChatParseCommandTypeException;
-
 import java.util.Objects;
 import java.util.regex.Matcher;
-
-
 import static java.util.Objects.isNull;
+
+/**
+ * Class with static functionality for parsing commands from strings.
+ */
 
 public class ClientCommandController extends CommandController{
 

@@ -4,6 +4,10 @@ import com.db.project04.exceptions.ChatMessageException;
 
 import static java.util.Objects.isNull;
 
+/**
+ * Class for handling authentication.
+ */
+
 public class ChidCommand implements ChatCommand{
     public static final String COMMAND_NAME= "chid";
     public static final int MAX_LENGTH = 150;
