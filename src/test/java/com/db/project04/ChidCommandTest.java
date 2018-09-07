@@ -28,7 +28,7 @@ public class ChidCommandTest {
 
     @Test (expected = ChatMessageException.class)
     public void shouldThrowChatMessageExceptionWhenUsernameIsEmpty() throws ChatMessageException {
-        ChidCommand sut = new ChidCommand(" ");
+        ChidCommand sut = new ChidCommand("");
     }
 
     @Test (expected = ChatMessageException.class)

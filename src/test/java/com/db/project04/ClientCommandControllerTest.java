@@ -18,6 +18,32 @@ public class ClientCommandControllerTest  implements SysoutCaptureAndAssertionAb
     }
 
     @Test
+    public void shouldCreateChidCommand() throws ChatParseCommandException {
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/chid name", "1");
+        assertTrue(resultCommand instanceof ChidCommand);
+    }
+
+    @Test (expected = ChatParseMessageException.class)
+    public void shouldThrowExceprionForIncorrectUsername() throws ChatParseCommandException {
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/chid name name", "1");
+    }
+
+    @Test (expected = ChatParseCommandException.class)
+    public void shouldThrowExceprionWhenUsernameIsEmpty() throws ChatParseCommandException {
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/hist", "");
+    }
+
+    @Test (expected = ChatParseCommandException.class)
+    public void shouldThrowExceprionWhenUsernameIsEmptyWhenTrimmed() throws ChatParseCommandException {
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/hist", "  ");
+    }
+
+    @Test (expected = ChatParseCommandException.class)
+    public void shouldThrowExceprionWhenUsernameIsNull() throws ChatParseCommandException {
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/hist", null);
+    }
+
+    @Test
     public void shouldCreateSendMessageCommand() throws ChatParseCommandException {
         ChatCommand resultCommand = ClientCommandController.parseCommand("/snd test message", "1");
         assertTrue(resultCommand instanceof RobustSendMessageCommand);
@@ -36,5 +62,11 @@ public class ClientCommandControllerTest  implements SysoutCaptureAndAssertionAb
     @Test(expected = ChatParseCommandFormatException.class)
     public void shouldThrowChatMessageExceptionWhenWrongInput() throws ChatParseCommandException {
         ChatCommand resultCommand = ClientCommandController.parseCommand("wrong ", "1");
+    }
+
+    @Test
+    public void shouldCreateShutdownCommand() throws ChatParseCommandException {
+        ChatCommand resultCommand = ClientCommandController.parseCommand("/quit", "1");
+        assertTrue(resultCommand instanceof ClientShutdownCommand);
     }
 }
