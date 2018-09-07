@@ -1,4 +1,4 @@
-package com.db.project04;
+package com.db.project04.unittests;
 
 import com.db.project04.command.*;
 import com.db.project04.exceptions.ChatException;
@@ -32,5 +32,21 @@ public class ServerCommandControllerTest {
     @Test(expected = ChatParseCommandTypeException.class)
     public void shouldThrowChatMessageExceptionWhenUndefinedCommand() throws ChatException {
         ChatCommand resultCommand = ServerCommandController.parseCommand(username + " " + "/wrong ");
+    }
+
+    @Test(expected = ChatException.class)
+    public void shouldThrowChatMessageExceptionWhenUsernameIsEmpty() throws ChatException {
+        ChatCommand resultCommand = ServerCommandController.parseCommand("/snd ");
+    }
+
+    @Test(expected = ChatException.class)
+    public void shouldThrowChatMessageExceptionWhenUsernameIsEmptyAndCommandIsWrong() throws ChatException {
+        ChatCommand resultCommand = ServerCommandController.parseCommand("/wrong ");
+    }
+
+    @Test
+    public void shouldCreateShutdownCommand() throws ChatException {
+        ChatCommand resultCommand = ServerCommandController.parseCommand(username + " " + "/quit");
+        assertTrue(resultCommand instanceof ClientShutdownCommand);
     }
 }

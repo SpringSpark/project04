@@ -1,5 +1,6 @@
-package com.db.project04;
+package com.db.project04.unittests;
 
+import com.db.project04.SysoutCaptureAndAssertionAbility;
 import com.db.project04.command.*;
 import com.db.project04.exceptions.ChatParseCommandException;
 import com.db.project04.exceptions.ChatParseCommandFormatException;
@@ -9,7 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class ClientCommandControllerTest  implements SysoutCaptureAndAssertionAbility  {
+public class ClientCommandControllerTest  implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldCreateHistoryCommand() throws ChatParseCommandException {

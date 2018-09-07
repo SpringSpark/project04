@@ -1,4 +1,4 @@
-package com.db.project04;
+package com.db.project04.unittests;
 
 import com.db.project04.message.ServerMessage;
 import com.db.project04.server.messagehistory.SimpleMessageHistory;

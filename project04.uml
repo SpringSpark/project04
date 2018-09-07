@@ -9,11 +9,11 @@
     <node x="481.0" y="543.0">com.db.project04.message.ServerMessage</node>
     <node x="0.0" y="160.0">com.db.project04.exceptions.ChatParseCommandFormatException</node>
     <node x="18.0" y="390.0">com.db.project04.server.messagehistory.MessageHistory</node>
-    <node x="-309.0" y="479.0">com.db.project04.RobustSendMessageCommandTest</node>
+    <node x="-309.0" y="479.0">com.db.project04.unittests.RobustSendMessageCommandTest</node>
     <node x="489.0" y="160.0">com.db.project04.exceptions.ChatParseCommandTypeException</node>
     <node x="0.0" y="695.0">com.db.project04.server.Server</node>
     <node x="269.0" y="160.0">com.db.project04.exceptions.ChatParseMessageException</node>
-    <node x="-307.0" y="518.0">com.db.project04.SimpleMessageHistoryTest</node>
+    <node x="-307.0" y="518.0">com.db.project04.unittests.SimpleMessageHistoryTest</node>
     <node x="-195.0" y="225.0">com.db.project04.command.CommandController</node>
     <node x="199.0" y="315.0">com.db.project04.command.HistoryCommand</node>
     <node x="0.0" y="315.0">com.db.project04.command.RobustSendMessageCommand</node>

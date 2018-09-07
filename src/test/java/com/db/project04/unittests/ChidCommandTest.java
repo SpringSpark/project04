@@ -1,4 +1,4 @@
-package com.db.project04;
+package com.db.project04.unittests;
 
 import com.db.project04.command.ChidCommand;
 import com.db.project04.command.RobustSendMessageCommand;

@@ -1,4 +1,4 @@
-package com.db.project04;
+package com.db.project04.unittests;
 
 import com.db.project04.command.RobustSendMessageCommand;
 import com.db.project04.exceptions.ChatMessageException;
@@ -22,7 +22,7 @@ public class RobustSendMessageCommandTest {
 
     @Test (expected = ChatMessageException.class)
     public void shouldThrowChatMessageExceptionWhenMessageIsEmpty() throws ChatMessageException {
-        RobustSendMessageCommand sut = new RobustSendMessageCommand(" ");
+        RobustSendMessageCommand sut = new RobustSendMessageCommand("");
     }
 
     @Test (expected = ChatMessageException.class)
