@@ -1,18 +1,23 @@
 package com.db.project04.client;
+import com.db.project04.RemoteConfiguration;
 import com.db.project04.command.ChatCommand;
 import com.db.project04.command.ChidCommand;
 import com.db.project04.command.ClientCommandController;
 import com.db.project04.exceptions.ChatClientException;
 import com.db.project04.exceptions.ChatParseCommandException;
+
+import java.io.IOException;
+import java.net.Socket;
 import java.util.Scanner;
 
 /**
  * Console class for client
  */
 public class ClientMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         try {
-            Client client = new Client(null);
+            Socket socket = new Socket(RemoteConfiguration.HOST, RemoteConfiguration.PORT_NUMBER);
+            Client client = new Client(null, socket);
             Thread newThread = new Thread( () -> {
                 try {
                     client.receiveAndPrint();

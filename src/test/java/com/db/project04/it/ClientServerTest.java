@@ -10,8 +10,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.net.Socket;
+
+import static org.mockito.Mockito.mock;
 
 public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
+
+    Socket mockSocket = mock(Socket.class);
 
     @Before
     public void setUpSystemOut() throws IOException {
@@ -31,7 +36,7 @@ public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
     public void serverAndClientShouldNotRaiseException() throws IOException, ChatClientException {
         Server server = new Server();
         server.start();
-        Client client = new Client("testUsername");
+        Client client = new Client("testUsername", mockSocket);
         String testString = "/snd test";
         server.stop();
     }
@@ -40,8 +45,8 @@ public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
     public void serverShouldCreateNewConnections() throws IOException, ChatClientException, InterruptedException {
         Server server = new Server();
         server.start();
-        Client client1 = new Client("testUsername1");
-        Client client2 = new Client("testUsername2");
+        Client client1 = new Client("testUsername1", mockSocket);
+        Client client2 = new Client("testUsername2", mockSocket);
         String testString1 = "/snd test1";
         String testString2 = "/snd test2";
 

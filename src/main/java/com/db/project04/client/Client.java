@@ -32,24 +32,27 @@ public class Client {
         this.username = username;
     }
 
-    public Client(String username) throws ChatClientException {
-        try {
-            socket = new Socket(RemoteConfiguration.HOST, RemoteConfiguration.PORT_NUMBER);
-
-            this.username = username;
-
-            out = new PrintWriter(
-                    new OutputStreamWriter(
-                            new BufferedOutputStream(
-                                    socket.getOutputStream())));
-            in = new BufferedReader(
-                    new InputStreamReader(
-                            new BufferedInputStream(
-                                    socket.getInputStream())));
-        } catch (IOException e) {
-            throw new ChatClientException("Unable to connect to server", e);
-        }
+    public void setOut(PrintWriter out) {
+        this.out = out;
     }
+
+    public void setIn(BufferedReader in) {
+        this.in = in;
+    }
+
+    public Client(String username, Socket socket) throws ChatClientException, IOException {
+        this.username = username;
+        this.socket = socket;
+        out = new PrintWriter(
+                new OutputStreamWriter(
+                        new BufferedOutputStream(
+                                socket.getOutputStream())));
+        in = new BufferedReader(
+                new InputStreamReader(
+                        new BufferedInputStream(
+                                socket.getInputStream())));
+    }
+
 
     public void send(String stringMessage) {
         out.println(stringMessage);

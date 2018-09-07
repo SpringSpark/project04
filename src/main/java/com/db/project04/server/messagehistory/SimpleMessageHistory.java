@@ -5,13 +5,14 @@ import com.db.project04.message.ServerMessage;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SimpleMessageHistory extends MessageHistory {
     private FileSaver fileSaver;
-    protected List<ServerMessage> bufferHistory;
+    protected Collection<ServerMessage> bufferHistory;
 
     public SimpleMessageHistory() throws FileException {
         messageHistoryArray = new CopyOnWriteArrayList<>();
