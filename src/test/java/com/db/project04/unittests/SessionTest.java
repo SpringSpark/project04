@@ -1,6 +1,7 @@
 package com.db.project04.unittests;
 
 import com.db.project04.SysoutCaptureAndAssertionAbility;
+import com.db.project04.exceptions.ChatException;
 import com.db.project04.server.Session;
 import com.db.project04.server.messagehistory.MessageHistory;
 import org.junit.After;
@@ -39,5 +40,22 @@ public class SessionTest implements SysoutCaptureAndAssertionAbility {
     public void shouldNotCreateSession(){
         Session sut = new Session(null, null);
         assertSysoutContains("Could not create session");
+    }
+
+    @Test
+    public void shouldParseCorrectHistoryCommand() throws ChatException {
+        Socket mockClient = mock(Socket.class);
+        MessageHistory mockMessageHistory = mock(MessageHistory.class);
+        Session sut = new Session(mockClient, mockMessageHistory);
+        sut.parseInputLine("\\/hist");
+    }
+
+    @Test
+    public void shouldParseCorrectSendCommand() throws ChatException {
+        Socket mockClient = mock(Socket.class);
+        MessageHistory mockMessageHistory = mock(MessageHistory.class);
+        Session sut = new Session(mockClient, mockMessageHistory);
+        sut.parseInputLine("\\/snd test");
+        sut.getMessageHistory().getMessageHistory().contains("test");
     }
 }

@@ -83,7 +83,7 @@ public class Session implements Runnable {
 
     }
 
-    private void parseInputLine(String line) throws ChatException {
+    public void parseInputLine(String line) throws ChatException {
         try {
             ChatCommand command = ServerCommandController.parseCommand(line);
             if (command instanceof HistoryCommand) {
