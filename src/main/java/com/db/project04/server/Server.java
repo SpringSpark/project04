@@ -18,7 +18,7 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
 public class Server {
 
     ExecutorService pool = newFixedThreadPool(RemoteConfiguration.POOL_SIZE);
-    public  MessageHistory messageHistory  =new SimpleMessageHistory();
+    public  MessageHistory messageHistory  = new SimpleMessageHistory();
 
     public Server() {
         messageHistory = new SimpleMessageHistory();
@@ -28,18 +28,20 @@ public class Server {
         ServerSocket portListener = new ServerSocket(RemoteConfiguration.PORT_NUMBER);
 
         new Thread(() -> {
-            try {
                 while (!interrupted()) {
-                    Socket clientSession = portListener.accept();
-                    Session.clientPool.add(new PrintWriter(
-                            new OutputStreamWriter(
-                                    new BufferedOutputStream(
-                                            clientSession.getOutputStream()))));
-                    pool.execute(new Session(clientSession, messageHistory));
+                    try {
+                        Socket clientSession = portListener.accept();
+                        Session.clientPool.add(new PrintWriter(
+                                new OutputStreamWriter(
+                                        new BufferedOutputStream(
+                                                clientSession.getOutputStream()))));
+                        pool.execute(new Session(clientSession, messageHistory));
+                    }
+                    catch(IOException e){
+                        System.out.println("Client is not ok");
+                    }
+
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }).start();
         System.out.println("We are alive");
     }

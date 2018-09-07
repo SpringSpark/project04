@@ -6,7 +6,6 @@ import com.db.project04.exceptions.ChatParseCommandException;
 import com.db.project04.exceptions.ClientDisconnectedException;
 import com.db.project04.message.ServerMessage;
 import com.db.project04.server.messagehistory.MessageHistory;
-import com.db.project04.server.messagehistory.SimpleMessageHistory;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,14 +13,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
+import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Session implements Runnable {
 
     private Socket client;
     private BufferedReader in;
     private PrintWriter out;
-    static Collection<PrintWriter> clientPool = new ArrayList();
+    static Collection<PrintWriter> clientPool = new CopyOnWriteArrayList();
     String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
     private MessageHistory messageHistory;
 
@@ -63,7 +63,10 @@ public class Session implements Runnable {
                             String message = ((SendMessageCommand) command).getHandledString();
                             String messageToClient = date + " " + message;
                             messageHistory.addNewMessage(new ServerMessage(((SendMessageCommand) command).getHandledString(), date));
-                            for (PrintWriter out : clientPool) {
+
+                            Iterator<PrintWriter> iterator = clientPool.iterator();
+                            while(iterator.hasNext()){
+                                PrintWriter out = iterator.next();
                                 out.println(messageToClient);
                                 out.flush();
                             }
