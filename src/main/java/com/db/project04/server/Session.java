@@ -79,9 +79,6 @@ public class Session implements Runnable {
                                 out.println(messageToClient);
                                 out.flush();
                             }
-                            if (command instanceof ClientShutdownCommand) {
-                                clientPool.remove(this.out);
-                            }
                         }
                     } catch (ChatParseCommandException e) {
                         out.println("Something went wrong, retry, please");
