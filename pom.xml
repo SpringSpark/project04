@@ -55,6 +55,7 @@
                     </targetTests>
                     <outputFormats>
                         <outputFormat>XML</outputFormat>
+                        <outputFormat>HTML</outputFormat>
                     </outputFormats>
                     <reportsDirectory>
                         target/pit-reports

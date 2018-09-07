@@ -5,6 +5,8 @@ import com.db.project04.command.RobustSendMessageCommand;
 import com.db.project04.exceptions.ChatMessageException;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class ChidCommandTest {
     private final String CORRECT_USERNAME = "test_username";
     private final String USERNAME_WITH_SPACE = "test username";
@@ -44,5 +46,17 @@ public class ChidCommandTest {
     @Test
     public void shouldSetUsernameWhenTrimmedUsernameIsFine() throws ChatMessageException {
         ChidCommand sut = new ChidCommand(CORRECT_USERNAME_WITH_SPACES);
+    }
+
+    @Test
+    public void getChidCommandName() throws ChatMessageException {
+        ChidCommand sut = new ChidCommand(CORRECT_USERNAME);
+        assertEquals("chid", sut.getCommandName());
+    }
+
+    @Test
+    public void getChidHandledString() throws ChatMessageException {
+        ChidCommand sut = new ChidCommand(CORRECT_USERNAME);
+        assertEquals(CORRECT_USERNAME, sut.getHandledString());
     }
 }
