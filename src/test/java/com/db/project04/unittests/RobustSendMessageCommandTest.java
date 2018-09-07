@@ -4,6 +4,8 @@ import com.db.project04.command.RobustSendMessageCommand;
 import com.db.project04.exceptions.ChatMessageException;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class RobustSendMessageCommandTest {
 
     private final String CORRECT_STRING = "test string";
@@ -13,6 +15,7 @@ public class RobustSendMessageCommandTest {
     @Test
     public void shouldCreateSendMessageCommandWhendMessageIsFine() throws ChatMessageException {
         RobustSendMessageCommand sut = new RobustSendMessageCommand(CORRECT_STRING);
+        assertEquals(sut.getHandledString(), CORRECT_STRING);
     }
 
     @Test (expected = ChatMessageException.class)
@@ -38,6 +41,7 @@ public class RobustSendMessageCommandTest {
     @Test
     public void shouldCreateSendMessageCommandWhenTrimmedMessageIsFine() throws ChatMessageException {
         RobustSendMessageCommand sut = new RobustSendMessageCommand(CORRECT_STRING_WITH_SPACES);
+        assertEquals(sut.getHandledString(), CORRECT_STRING_WITH_SPACES.trim());
     }
 
 }
