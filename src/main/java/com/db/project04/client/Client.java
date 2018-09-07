@@ -21,24 +21,7 @@ public class Client {
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
-
     private String username;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setOut(PrintWriter out) {
-        this.out = out;
-    }
-
-    public void setIn(BufferedReader in) {
-        this.in = in;
-    }
 
     public Client(String username, Socket socket) throws ChatClientException, IOException {
         this.username = username;
@@ -85,5 +68,23 @@ public class Client {
 
     }
 
+    public String getUsername() {
+        return username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setOut(PrintWriter out) {
+        this.out = out;
+    }
+
+    public void setIn(BufferedReader in) {
+        this.in = in;
+    }
+
+    public PrintWriter getOut(){ return out; }
+
+    public BufferedReader getIn() {return in; }
 }

@@ -13,19 +13,18 @@ import static org.mockito.Mockito.*;
 
 public class ClientTest {
     @Test
-    public void clientSetUserName() throws IOException, ChatClientException {
+    public void clientShouldSetUserName() throws IOException, ChatClientException {
         Server server = mock(Server.class);
-        server.start();
         Socket mockSocket = mock(Socket.class);
-        Client client = new Client("user_name", mockSocket);
-        assertEquals("user_name", client.getUsername());
-        server.stop();
+        Client client = new Client("old_name", mockSocket);
+        String testName = "test_name";
+        client.setUsername(testName);
+        assertEquals(testName, client.getUsername());
     }
 
     @Test
     public void clientShouldSend() throws IOException, ChatClientException {
         Server server = mock(Server.class);
-        server.start();
         Socket mockSocket = mock(Socket.class);
         Client client = new Client("user_name", mockSocket);
 
@@ -38,7 +37,6 @@ public class ClientTest {
     @Test (expected = ChatClientException.class)
     public void clientShouldNotReceiveAndPrintWithoutInput() throws IOException, ChatClientException {
         Server server = mock(Server.class);
-        server.start();
         Socket mockSocket = mock(Socket.class);
         Client client = new Client("user_name", mockSocket);
         client.receiveAndPrint();
@@ -47,7 +45,6 @@ public class ClientTest {
     @Test
     public void clientShouldReceiveAndPrint() throws IOException, ChatClientException {
         Server server = mock(Server.class);
-        server.start();
         Socket mockSocket = mock(Socket.class);
         Client client = new Client("user_name", mockSocket);
         BufferedReader mockIn = mock(BufferedReader.class);
@@ -60,7 +57,6 @@ public class ClientTest {
     @Test
     public void clientShouldQuit() throws IOException, ChatClientException {
         Server server = mock(Server.class);
-        server.start();
         Socket mockSocket = mock(Socket.class);
         Client client = new Client("user_name", mockSocket);
         BufferedReader mockIn = mock(BufferedReader.class);
@@ -72,5 +68,25 @@ public class ClientTest {
         verify(mockIn, times(1)).close();
         verify(mockSocket, times(1)).close();
         verify(mockOut, times(1)).close();
+    }
+
+    @Test
+    public void clientShouldSetIn() throws IOException, ChatClientException {
+        Server server = mock(Server.class);
+        Socket mockSocket = mock(Socket.class);
+        Client client = new Client("user_name", mockSocket);
+        BufferedReader mockIn = mock(BufferedReader.class);
+        client.setIn(mockIn);
+        assertEquals(mockIn, client.getIn());
+    }
+
+    @Test
+    public void clientShouldSetOut() throws IOException, ChatClientException {
+        Server server = mock(Server.class);
+        Socket mockSocket = mock(Socket.class);
+        Client client = new Client("user_name", mockSocket);
+        PrintWriter mockOut = mock(PrintWriter.class);
+        client.setOut(mockOut);
+        assertEquals(mockOut, client.getOut());
     }
 }
