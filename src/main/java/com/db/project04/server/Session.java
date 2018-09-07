@@ -27,12 +27,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Session implements Runnable {
 
-    private Socket client;
+    private final Socket client;
     private BufferedReader in;
     private PrintWriter out;
     static Collection<PrintWriter> clientPool = new CopyOnWriteArrayList();
     String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
     private MessageHistory messageHistory;
+
+    public Socket getClient(){return client;}
+
+    public MessageHistory getMessageHistory(){return messageHistory;}
+
 
     public Session(Socket client, MessageHistory messageHistory) {
         this.client = client;
@@ -59,30 +64,7 @@ public class Session implements Runnable {
             String line = null;
             try {
                 while ((line = in.readLine()) != null) {
-                    try {
-                        ChatCommand command = ServerCommandController.parseCommand(line);
-                        if (command instanceof HistoryCommand) {
-
-                            messageHistory.getMessageHistory().stream().forEach(elem -> {
-                                out.println(elem.toString());
-                                out.flush();
-                            });
-                        }
-                        if (command instanceof SendMessageCommand) {
-                            String message = ((SendMessageCommand) command).getHandledString();
-                            String messageToClient = date + " " + message;
-                            messageHistory.addNewMessage(new ServerMessage(((SendMessageCommand) command).getHandledString(), date));
-
-                            Iterator<PrintWriter> iterator = clientPool.iterator();
-                            while(iterator.hasNext()){
-                                PrintWriter out = iterator.next();
-                                out.println(messageToClient);
-                                out.flush();
-                            }
-                        }
-                    } catch (ChatParseCommandException e) {
-                        out.println("Something went wrong, retry, please");
-                    }
+                    parseInputLine(line);
                     out.println();
                     out.flush();
                 }
@@ -99,5 +81,39 @@ public class Session implements Runnable {
             e.printStackTrace();
         }
 
+    }
+
+    private void parseInputLine(String line) throws ChatException {
+        try {
+            ChatCommand command = ServerCommandController.parseCommand(line);
+            if (command instanceof HistoryCommand) {
+                handleHistoryCommand();
+            }
+            if (command instanceof SendMessageCommand) {
+                handleSendMessageCommand((SendMessageCommand) command);
+            }
+        } catch (ChatParseCommandException e) {
+            out.println("Something went wrong, retry, please");
+        }
+    }
+
+    private void handleHistoryCommand() {
+        messageHistory.getMessageHistory().stream().forEach(elem -> {
+            out.println(elem.toString());
+            out.flush();
+        });
+    }
+
+    private void handleSendMessageCommand(SendMessageCommand command) {
+        String message = command.getHandledString();
+        String messageToClient = date + " " + message;
+        messageHistory.addNewMessage(new ServerMessage(command.getHandledString(), date));
+
+        Iterator<PrintWriter> iterator = clientPool.iterator();
+        while(iterator.hasNext()){
+            PrintWriter out = iterator.next();
+            out.println(messageToClient);
+            out.flush();
+        }
     }
 }
