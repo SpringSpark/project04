@@ -7,7 +7,7 @@ import static java.util.Objects.isNull;
 public class ChidCommand implements ChatCommand{
     public static final String COMMAND_NAME= "chid";
     public static final int MAX_LENGTH = 150;
-    private String handledString;
+    private final String handledString;
 
     @Override
     public String getCommandName() {
@@ -18,14 +18,14 @@ public class ChidCommand implements ChatCommand{
         if(isNull(messageString) || messageString.isEmpty() || messageString.trim().isEmpty()) {
             throw new ChatMessageException("empty username");
         }
-        messageString = messageString.trim();
-        if(messageString.length() > MAX_LENGTH) {
+        String resultMessageString = messageString.trim();
+        if(resultMessageString.length() > MAX_LENGTH) {
             throw new ChatMessageException("username is longer than 150 characters");
         }
-        if(messageString.contains(" ")) {
+        if(resultMessageString.contains(" ")) {
             throw new ChatMessageException("invalid username");
         }
-        handledString = messageString;
+        handledString = resultMessageString;
     }
 
     public String getHandledString() {
