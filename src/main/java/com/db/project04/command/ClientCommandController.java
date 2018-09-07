@@ -13,7 +13,7 @@ import static java.util.Objects.isNull;
  * Class with static functionality for parsing commands from strings.
  */
 
-public class ClientCommandController extends CommandController{
+public final class ClientCommandController extends CommandController{
 
     private ClientCommandController() {
     }
