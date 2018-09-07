@@ -2,6 +2,7 @@ package com.db.project04.client;
 
 import com.db.project04.RemoteConfiguration;
 import com.db.project04.exceptions.ChatClientException;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,9 +13,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {
-    Socket socket;
-    PrintWriter out;
-    BufferedReader in;
+    private Socket socket;
+    private PrintWriter out;
+    private BufferedReader in;
 
     private String username;
 
@@ -53,7 +54,7 @@ public class Client {
     public void receiveAndPrint() throws ChatClientException {
         String messageFromServer = null;
         try {
-            while ((messageFromServer = in.readLine())!= null) {
+            while ((messageFromServer = in.readLine()) != null) {
                 System.out.println(messageFromServer);
             }
         } catch (IOException e) {

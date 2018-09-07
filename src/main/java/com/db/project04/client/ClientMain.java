@@ -18,14 +18,7 @@ public class ClientMain {
                     client.receiveAndPrint();
                 } catch (ChatClientException e) {
                     System.out.println("Server is dead");
-                    try {
-                        client.quit();
-                    } catch (ChatClientException e1) {
-                        System.out.println("Can't shutdown client in a proper way");
-                    }
-                    finally {
-                        System.exit(0);
-                    }
+                    ShutdownClient(client);
                 }
             }
             );
@@ -35,23 +28,40 @@ public class ClientMain {
                 newThread.join(10);
                 Scanner in = new Scanner(System.in);
                 String inputString = in.nextLine();
-                ChatCommand clientCommand = null;
-                try {
-                    clientCommand = ClientCommandController.parseCommand(inputString, client.getUsername());
-                    if(clientCommand instanceof ChidCommand){
-                        client.setUsername(((ChidCommand) clientCommand).getHandledString());
-                    }
-                    else{
-                        client.send(client.getUsername() + " " + inputString);
-                    }
-                } catch (ChatParseCommandException e) {
-                    System.out.println("Error: " + e.getMessage());
-                }
+                setUsernameOrSendMessage(client, inputString);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private static void setUsernameOrSendMessage(Client client, String inputString) {
+        ChatCommand clientCommand;
+        try {
+            clientCommand = ClientCommandController.parseCommand(inputString, client.getUsername());
+            if(clientCommand instanceof ChidCommand){
+                client.setUsername(((ChidCommand) clientCommand).getHandledString());
+            }
+            else{
+                client.send(client.getUsername() + " " + inputString);
+            }
+        } catch (ChatParseCommandException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void ShutdownClient(Client client) {
+        try {
+            client.quit();
+        } catch (ChatClientException e1) {
+            System.out.println("Can't shutdown client in a proper way");
+        }
+        finally {
+            System.exit(0);
+        }
+    }
+
+    private ClientMain(){}
 }
 
