@@ -10,10 +10,6 @@ import static java.util.Objects.isNull;
 
 public class ServerCommandController extends CommandController{
 
-    public static final Pattern PREPARATION_COMMAND_STRING_PATTERN = Pattern.compile("(\\S+) (.+)");
-    public static final Pattern COMMAND_STRING_PATTERN = Pattern.compile("\\/([A-Za-z]+)(.*)");
-
-    //(.+) (.+)
     public static ChatCommand parseCommand(String rawString) throws ChatException {
 
         Matcher sndCommandStringPatternMatcher = PREPARATION_COMMAND_STRING_PATTERN.matcher(rawString);
