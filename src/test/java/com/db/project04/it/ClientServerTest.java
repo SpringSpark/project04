@@ -33,10 +33,10 @@ public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
         server.start();
         Client client = new Client();
         String testString = "/snd test";
+        server.stop();
     }
 
-    @Ignore
-    @Test
+    @Test @Ignore
     public void serverShouldCreateNewConnections() throws IOException, ChatClientException, InterruptedException {
         Server server = new Server();
         server.start();

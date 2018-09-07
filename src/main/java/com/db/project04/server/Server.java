@@ -19,13 +19,15 @@ public class Server {
 
     ExecutorService pool = newFixedThreadPool(RemoteConfiguration.POOL_SIZE);
     public  MessageHistory messageHistory  = new SimpleMessageHistory();
+    ServerSocket portListener;
 
-    public Server() {
+    public Server() throws IOException {
         messageHistory = new SimpleMessageHistory();
+        portListener  =new ServerSocket(RemoteConfiguration.PORT_NUMBER);
     }
 
     public void start() throws IOException {
-        ServerSocket portListener = new ServerSocket(RemoteConfiguration.PORT_NUMBER);
+
 
         new Thread(() -> {
                 while (!interrupted()) {
@@ -48,6 +50,7 @@ public class Server {
 
     public void stop() throws IOException {
         pool.shutdownNow();
+        portListener.close();
     }
 }
 

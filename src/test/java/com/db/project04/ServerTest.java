@@ -8,6 +8,9 @@ import java.io.IOException;
 public class ServerTest {
     @Test
     public void smokeServerTest() throws IOException {
+        Server server = new Server();
+        server.start();
+        server.stop();
 
     }
 }
