@@ -19,7 +19,7 @@ public class ClientTest {
     public void clientSetUserName() throws IOException, ChatClientException {
         Server server = new Server();
         server.start();
-        Client client = new Client();
+        Client client = new Client("user_name");
         client.setUsername("user_name");
         assertEquals("user_name", client.getUsername());
         server.stop();

@@ -1,6 +1,7 @@
 package com.db.project04.server;
 
 import com.db.project04.RemoteConfiguration;
+import com.db.project04.exceptions.FileException;
 import com.db.project04.server.messagehistory.MessageHistory;
 import com.db.project04.server.messagehistory.SimpleMessageHistory;
 
@@ -18,12 +19,16 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
 public class Server {
 
     ExecutorService pool = newFixedThreadPool(RemoteConfiguration.POOL_SIZE);
-    public  MessageHistory messageHistory  = new SimpleMessageHistory();
+    public  MessageHistory messageHistory;
     ServerSocket portListener;
 
     public Server() throws IOException {
-        messageHistory = new SimpleMessageHistory();
-        portListener  =new ServerSocket(RemoteConfiguration.PORT_NUMBER);
+        try {
+            messageHistory = new SimpleMessageHistory();
+        } catch (FileException e) {
+            System.out.println("Can't save history to file");
+        }
+        portListener  = new ServerSocket(RemoteConfiguration.PORT_NUMBER);
     }
 
     public void start() throws IOException {

@@ -14,7 +14,6 @@ public class ServerMessage {
   public ServerMessage(String handledMessageFromClient, String dateTime) {
       this.text = handledMessageFromClient;
       this.dateTime = dateTime;
-      //TODO: get date time
   }
 
     public void setText(String text) {

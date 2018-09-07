@@ -7,6 +7,7 @@ import com.db.project04.command.ClientShutdownCommand;
 import com.db.project04.command.ServerCommandController;
 import com.db.project04.exceptions.ChatException;
 import com.db.project04.exceptions.ChatParseCommandException;
+import com.db.project04.exceptions.FileException;
 import com.db.project04.message.ServerMessage;
 import com.db.project04.server.messagehistory.MessageHistory;
 
@@ -18,6 +19,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.net.Socket;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,8 +33,9 @@ public class Session implements Runnable {
     private BufferedReader in;
     private PrintWriter out;
     static Collection<PrintWriter> clientPool = new CopyOnWriteArrayList();
-    String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private MessageHistory messageHistory;
+    private final int max_amount_of_messages = 10;
 
     public Socket getClient(){return client;}
 
@@ -90,7 +93,11 @@ public class Session implements Runnable {
                 handleHistoryCommand();
             }
             if (command instanceof SendMessageCommand) {
-                handleSendMessageCommand((SendMessageCommand) command);
+                try {
+                    handleSendMessageCommand((SendMessageCommand) command);
+                } catch (FileException e) {
+                    System.out.println("Can't print history to file");
+                }
             }
         } catch (ChatParseCommandException e) {
             out.println("Something went wrong, retry, please");
@@ -104,11 +111,14 @@ public class Session implements Runnable {
         });
     }
 
-    private void handleSendMessageCommand(SendMessageCommand command) {
+    private void handleSendMessageCommand(SendMessageCommand command) throws FileException {
         String message = command.getHandledString();
+        String date = dateFormat.format(Calendar.getInstance().getTime());
         String messageToClient = date + " " + message;
         messageHistory.addNewMessage(new ServerMessage(command.getHandledString(), date));
-
+        if (messageHistory.getMessageHistory().size() > max_amount_of_messages){
+            messageHistory.saveToFile();
+        }
         Iterator<PrintWriter> iterator = clientPool.iterator();
         while(iterator.hasNext()){
             PrintWriter out = iterator.next();
