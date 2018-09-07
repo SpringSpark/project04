@@ -10,6 +10,7 @@ public class ServerMessage {
     private String text;
     private String dateTime;
 
+
   public ServerMessage(String handledMessageFromClient, String dateTime) {
       this.text = handledMessageFromClient;
       this.dateTime = dateTime;
@@ -17,7 +18,19 @@ public class ServerMessage {
   }
 
     public void setText(String text) {
-        this.text = text;
+      this.text = text;
+    }
+
+    public String getText(){
+        return this.text;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getDateTime(){
+        return this.dateTime;
     }
 
     @Override
