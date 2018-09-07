@@ -1,10 +1,9 @@
 package com.db.project04.client;
-
-import com.db.project04.command.*;
+import com.db.project04.command.ChatCommand;
+import com.db.project04.command.ChidCommand;
+import com.db.project04.command.ClientCommandController;
 import com.db.project04.exceptions.ChatClientException;
-import com.db.project04.exceptions.ChatMessageException;
 import com.db.project04.exceptions.ChatParseCommandException;
-
 import java.util.Scanner;
 
 /**

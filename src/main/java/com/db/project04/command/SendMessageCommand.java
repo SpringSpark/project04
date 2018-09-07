@@ -2,7 +2,6 @@ package com.db.project04.command;
 
 import com.db.project04.exceptions.ChatMessageException;
 
-import static java.util.Objects.isNull;
 
 public class SendMessageCommand implements ChatCommand {
 

@@ -2,8 +2,13 @@ package com.db.project04.client;
 
 import com.db.project04.RemoteConfiguration;
 import com.db.project04.exceptions.ChatClientException;
-
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {

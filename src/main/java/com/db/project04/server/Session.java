@@ -1,13 +1,22 @@
 package com.db.project04.server;
 
-import com.db.project04.command.*;
+import com.db.project04.command.ChatCommand;
+import com.db.project04.command.HistoryCommand;
+import com.db.project04.command.SendMessageCommand;
+import com.db.project04.command.ClientShutdownCommand;
+import com.db.project04.command.ServerCommandController;
 import com.db.project04.exceptions.ChatException;
 import com.db.project04.exceptions.ChatParseCommandException;
-import com.db.project04.exceptions.ClientDisconnectedException;
 import com.db.project04.message.ServerMessage;
 import com.db.project04.server.messagehistory.MessageHistory;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
