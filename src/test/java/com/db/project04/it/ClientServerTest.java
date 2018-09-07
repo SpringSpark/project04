@@ -31,7 +31,7 @@ public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
     public void serverAndClientShouldNotRaiseException() throws IOException, ChatClientException {
         Server server = new Server();
         server.start();
-        Client client = new Client();
+        Client client = new Client("testUsername");
         String testString = "/snd test";
         server.stop();
     }
@@ -40,8 +40,8 @@ public class ClientServerTest  implements SysoutCaptureAndAssertionAbility {
     public void serverShouldCreateNewConnections() throws IOException, ChatClientException, InterruptedException {
         Server server = new Server();
         server.start();
-        Client client1 = new Client();
-        Client client2 = new Client();
+        Client client1 = new Client("testUsername1");
+        Client client2 = new Client("testUsername2");
         String testString1 = "/snd test1";
         String testString2 = "/snd test2";
 

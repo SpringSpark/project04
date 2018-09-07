@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ClientMain {
     public static void main(String[] args) {
         try {
-            Client client = new Client();
+            Client client = new Client(null);
             Thread newThread = new Thread( () -> {
                 try {
                     client.receiveAndPrint();

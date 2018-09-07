@@ -32,11 +32,11 @@ public class Client {
         this.username = username;
     }
 
-    public Client() throws ChatClientException {
+    public Client(String username) throws ChatClientException {
         try {
             socket = new Socket(RemoteConfiguration.HOST, RemoteConfiguration.PORT_NUMBER);
 
-            username = null;
+            this.username = username;
 
             out = new PrintWriter(
                     new OutputStreamWriter(
