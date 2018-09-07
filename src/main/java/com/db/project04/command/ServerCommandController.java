@@ -8,7 +8,7 @@ import com.db.project04.exceptions.ChatParseCommandTypeException;
 import java.util.Objects;
 import java.util.regex.Matcher;
 
-public class ServerCommandController extends CommandController{
+public final class ServerCommandController extends CommandController{
 
     public static ChatCommand parseCommand(String rawString) throws ChatException {
 

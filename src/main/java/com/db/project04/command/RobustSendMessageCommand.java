@@ -23,4 +23,9 @@ public class RobustSendMessageCommand extends SendMessageCommand {
         }
         handledString = messageString;
     }
+
+    @Override
+    public String getHandledString() {
+        return handledString;
+    }
 }

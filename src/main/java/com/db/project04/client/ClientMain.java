@@ -31,7 +31,7 @@ public class ClientMain {
                 setUsernameOrSendMessage(client, inputString);
             }
 
-        } catch (Exception e) {
+        } catch (ChatClientException | InterruptedException e) {
             e.printStackTrace();
         }
     }
