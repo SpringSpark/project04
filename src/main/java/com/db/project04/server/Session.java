@@ -53,8 +53,8 @@ public class Session implements Runnable {
             this.messageHistory = messageHistory;
             System.out.println("New connection");
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Could not create session");
         }
     }
 
@@ -83,7 +83,7 @@ public class Session implements Runnable {
 
     }
 
-    private void parseInputLine(String line) throws ChatException {
+    public void parseInputLine(String line) throws ChatException {
         try {
             ChatCommand command = ServerCommandController.parseCommand(line);
             if (command instanceof HistoryCommand) {
