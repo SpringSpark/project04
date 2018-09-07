@@ -53,8 +53,8 @@ public class Session implements Runnable {
             this.messageHistory = messageHistory;
             System.out.println("New connection");
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Could not create session");
         }
     }
 
